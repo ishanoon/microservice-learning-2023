@@ -24,7 +24,7 @@ public class OrderService {
     private final String INVENTORY_SERVICE_BASE_URL = "http://INVENTORY-SERVICE/api/v1/inventory";
 
 
-    public void placeOrder(OrderRequest orderRequest) throws IllegalAccessException {
+    public String placeOrder(OrderRequest orderRequest) throws IllegalAccessException {
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
         order.setOrderLineItemsList(orderLineItems(orderRequest));
@@ -42,6 +42,7 @@ public class OrderService {
             throw new IllegalAccessException("Product is not in stock");
         }
 
+        return "Order placed successfully";
     }
 
     private List<OrderLineItems> orderLineItems(OrderRequest orderRequest){
